@@ -1,0 +1,55 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+  {% if user.plate_num != null %}
+    <p>Hi Driver {{user.username}}!</p>
+  {% else %}
+    <p>Hi {{user.username}}!</p>
+  {%endif%}
+  {% if user.plate_num != null %}
+    <h4>Driver</h4>
+    <p>
+      <button onclick="window.location.href='/rideShare/takeableRides/'">Take a ride</button>
+      <button onclick="window.location.href='/rideShare/takenRides/'">Check taken rides</button>
+      <button onclick="window.location.href='/rideShare/takenRidesHistory/'">Check taken rides history</button>
+    </p>
+  {% endif %}
+  <h4>Generic</h4>
+  <p>
+    <button onclick="window.location.href='/rideShare/createRide/'">Create a ride</button>
+    <button onclick="window.location.href='/rideShare/joinRide/'">Join a ride</button>
+  </p>
+  <p>
+    <button onclick="window.location.href='/rideShare/ownedRides/'">Check owned rides</button>
+    <button onclick="window.location.href='/rideShare/sharingRides/'">Check sharing rides</button>
+  </p>
+  <p>
+    <button onclick="window.location.href='/rideShare/ownedRidesHistory/'">Check owned rides history</button>
+    <button onclick="window.location.href='/rideShare/sharingRidesHistory'">Check sharing rides history</button>
+  </p>
+  {% if user.plate_num == null %}
+    <p>
+      <button onclick="window.location.href='/rideShare/driverRegistration/'">Become a driver</button>
+    </p>
+  {% endif %}
+  <p>
+    <a href="{% url 'logout' %}">logout</a>  &nbsp;
+    <a href="{% url 'profile' %}">profile</a>
+  </p>
+{% else %}
+    <meta http-equiv="Refresh" content="0; url='/rideShare/accounts/login/'">
+{% endif %}
+<!-- {% if user.plate_num == null %} -->
+  <!-- Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">logout</a></p> -->
+
+<!-- {% else %} -->
+  <!-- <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a> -->
+<!-- {% endif %} -->
+{% endblock %}

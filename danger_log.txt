@@ -1,0 +1,43 @@
+01/19: When we are testing the sign in function, we found that the email part can be left blanked, which is not allowed because we use email to inform user about their ride changes.
+01/21: We set "blank==false" to force this widget must not be blank.
+
+01/22: When we are testing the sharing function, we found that one ride can only be shared with one user. 
+01/23: We changed the share_id foreign key field in the model to make this attribute is sharable with multi user.
+
+01/25: When the user cancel a ride, it can only send email to one sharer.
+01/25: Enabled the multi-sharer field fixed this problem.
+
+01/27: After the user join a ride, he/she can join the ride again. The information should not show in his/her list after joining operation
+01/28: We add "exclude" function in the code, which will exclude the rides he already owned.
+
+01/29: After the driver take a ride, he/she can take the ride again. The information should not show in his/her list after taking operation
+01/30: We add "exclude" function in the code, which will exclude the rides he already token.
+
+02/01: A sharer can add passenger number that exceed the capacity of the car.
+02/01: Caused by the non-multi-sharable problem. Updated the function to fix the problem.
+
+02/01: A own can edit his/her ride information by increasing passenger number in a way which kicks sharers off the car.
+02/01: We found that this is because the editing function is not considering the sharing situation of the ride. Updated the editing function and fixed the bug.
+
+02/03: When canceling a sharing ride, the "Sharer" table contains multi information for one share which cannot be filtered out.
+02/04: Set two tables for sharing function. The first "Share" table is used for recording the information the usr inputted in the web.
+       The second "RegisteredSharer" table is used for recording the sharer and his/her ride. The primary key of this table is the "ride_id" and "sharer_id" both.
+
+02/05: When sharer is editing his/her own ride, he/she can input a number which exceeded the max capacity of the vehicle.
+02/05: We send the ride information to the SharerEditingForm, use "clean" function to check if the passenger number exceeded.
+
+02/06: After one of the sharer canceled the ride, the web page will give 404 error when another sharer tries to edit the page.
+02/06: Updated the "cancel_sharing_ride" function to fix this bug.
+
+02/06: The vehicle type is not a option choice for the usr
+02/06: Add a new "----" choice field.
+
+02/06: If the owner choose "----" as the vehicle type, driver, sharer get key error about vehicle type.
+02/06: Updated related function.
+
+02/07: If a malicious user modifies a URL, it is possible for she/he to get modify to user's database, such as canceling other users' rides.
+02/07: Raise an error whenever ride.owner != request.user.
+
+02/07: Two more more users can share a same vehicle plate number, which should not be permitted in our design.
+02/07: In driver promotion part, raise an error when the plate number in the form matches any of plate number in database.
+       In driver profile updating part, raise an error when the plate number in the form matches any of plate number database except her/his current plate number.

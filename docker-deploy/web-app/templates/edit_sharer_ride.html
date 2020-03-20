@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Own Ride{% endblock %}
+
+{% block content %}
+  <h2>Edit Ride</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Edit</button>
+  </form>
+  <p><a href="{% url 'home' %}">Home</a></p>
+{% endblock %}

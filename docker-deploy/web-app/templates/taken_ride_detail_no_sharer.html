@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Ride Details{% endblock %}
+
+{% block content %}
+
+<p>Ride Details</p>
+
+<p><strong>Ride owner: </strong>{{owner_name}}</p>
+<p><strong>Destination: </strong>{{destination}}</p>
+<p><strong>Passenger number: </strong>{{num_pass}}</p>
+<p><strong>Ride status: </strong>{{ride_status}}</p>
+<p><strong>Pickup time: </strong>{{pickup_time}}</p>
+<p><strong>Special requests: </strong>{{ special_requests }}</p>
+
+<p><a href="{% url 'home' %}">Home</a></p>
+
+{% endblock %}

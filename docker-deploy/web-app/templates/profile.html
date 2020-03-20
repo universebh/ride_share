@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+  <h2>Profile</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if has_taken_ride %}
+      <p><strong>Plate num: </strong>{{ user.plate_num.plate_num }}</p>
+      <p><strong>Type: </strong>
+      {% if user.plate_num.type == 'con' %}Convertible
+      {% elif user.plate_num.type == 'cou' %}Coupe
+      {% elif user.plate_num.type == 'sed' %}Sedan
+      {% elif user.plate_num.type == 'suv' %}SUV
+      {% elif user.plate_num.type == 'try' %}Truck
+      {% endif %}
+      </p>
+      <p><strong>Special vehicle info: </strong>{{ user.plate_num.special_vehicle_info }}</p>
+      <p>The vehicle information cannot be edited because you have incomplete taken rides right now.</p>
+    {% endif %}
+    
+    <button type="submit">Save</button>
+  </form>
+  <p><a href="{% url 'home' %}">Home</a></p>
+{% endblock %}

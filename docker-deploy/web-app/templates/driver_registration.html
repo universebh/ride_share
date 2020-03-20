@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Register as Driver{% endblock %}
+
+{% block content %}
+  <h2>Register as Driver</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+  </form>
+  <p><a href="{% url 'home' %}">Home</a></p>
+{% endblock %}

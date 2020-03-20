@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Ride Details{% endblock %}
+
+{% block content %}
+
+<p><h4>Ride Details</h4></p>
+
+<p><strong>Ride owner: </strong>{{owner_name}}</p>
+<p><strong>Driver: </strong>{{driver.username}}</p>
+
+<p><strong>Vehicle type: </strong>
+    {% if vehicle_type == 'con' %}Convertible
+    {% elif vehicle_type == 'cou' %}Coupe
+    {% elif vehicle_type == 'sed' %}Sedan
+    {% elif vehicle_type == 'suv' %}SUV
+    {% elif vehicle_type == 'tru' %}Truck
+    {% else %}---
+    {% endif %}
+    </p>
+
+{% if driver %}
+<p><strong>Plate num: </strong>{{ driver.plate_num.plate_num }}</p>
+{%  endif %}
+
+<p><strong>Destination: </strong>{{destination}}</p>
+<p><strong>Passenger number: </strong>{{num_pass}}</p>
+<p><strong>Ride status: </strong>{{ride_status}}</p>
+<p><strong>Pickup time: </strong>{{pickup_time}}</p>
+<p><strong>Special requests: </strong>{{ special_requests }}</p>
+
+<p><a href="{% url 'home' %}">Home</a></p>
+
+{% endblock %}

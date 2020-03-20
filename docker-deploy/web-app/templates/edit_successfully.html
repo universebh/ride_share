@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}rideCreated{% endblock %}
+
+{% block content %}
+<p>Your ride has been successfully edited! The page will be redirected in 3 seconds.</p>
+<p><a href="{% url 'owned_rides' %}"> Click here if it does not.</a></p>
+<meta http-equiv="Refresh" content="3; url=../../">
+{% endblock %}

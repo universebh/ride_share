@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}rideCreated{% endblock %}
+
+{% block content %}
+<div style="margin-left:20px;margin-top:20px">
+  <h4>Sharing Rides History</h4>
+  {% for ride in sharing_rides %}
+    <hr>
+    <p class="{% if ride.ride_status == 'opn' %}text-warning{% elif ride.ride_status == 'con' %}text-success{% else %}text-danger{% endif %}">
+      {% if ride.ride_status == 'opn' %}<strong>Open</strong>{% elif ride.ride_status == 'con' %}<strong>Confirmed</strong>{% else %}<strong>Completed</strong>{% endif %}
+    </p>
+    <p><strong>Destination: </strong>{{ ride.dest }}</p>
+    <p>
+      <strong>Sharable: </strong>{{ ride.sharable }} &nbsp;&nbsp;
+      <strong>Pickup time: </strong>{{ ride.pickup_time }} &nbsp;&nbsp;
+      {% if ride.driver %}
+        <strong>Driver: </strong>{{ ride.driver }} &nbsp;&nbsp;
+      {% endif %}
+      <strong>Vehicle type: </strong>
+      {% if ride.vehicle_type == 'con' %}Convertible{% elif ride.vehicle_type == 'cou' %}Coupe{% elif ride.vehicle_type == 'sed' %}Sedan{% elif ride.vehicle_type == 'suv' %}SUV{% elif ride.vehicle_type == 'tru'%}Truck{% else %} ---- {% endif %}
+      &nbsp;&nbsp;
+      <strong>Current passenger: </strong>{{ ride.actual_pass_num }} &nbsp;&nbsp;
+      <strong>Empty seat:</strong>
+        {% if ride.avail_seats > 7%}
+        ----
+        {%else%}
+        {{ ride.avail_seats }} &nbsp;&nbsp;
+      {%endif%}
+    </p>
+    <p class="text-muted"><strong>Ride ID: </strong> {{ ride.ride_id }}</p>
+  {% endfor %}
+</div>
+
+
+{% if sharing_rides.has_other_pages %}
+  <ul class="pagination">
+    {% if sharing_rides.has_previous %}
+      <li><a href="?page={{ sharing_rides.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in sharing_rides.paginator.page_range %}
+      {% if sharing_rides.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if sharing_rides.has_next %}
+      <li><a href="?page={{ sharing_rides.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+<p><a href="{% url 'home' %}">Home</a></p>
+
+{% endblock %}

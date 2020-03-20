@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}create_rid{% endblock %}
+
+{% block content %}
+
+<p>No rides you can share with. The page will be redirected in 5 seconds.</p>
+<p><a href="{% url 'home' %}"> Click here if it does not.</a></p>
+<meta http-equiv="Refresh" content="5; url=../../">
+{% endblock %}
